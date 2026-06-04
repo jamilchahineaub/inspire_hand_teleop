@@ -4,7 +4,7 @@
   <name>hand_perception</name>
   <version>0.0.1</version>
   <description>MediaPipe-based hand landmark detection node for ROS 2 Humble</description>
-  <maintainer email="jamilchahine26@gmail.com">jimmy</maintainer>
+  <maintainer email="jamilchahine26@gmail.com">Jamil Chahine</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
