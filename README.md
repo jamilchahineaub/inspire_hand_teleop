@@ -88,8 +88,6 @@ To calibrate a finger, read its angle open vs. closed and set the
 
 ## Documentation
 
-- [`docs/HAND_TELEOP_SYSTEM.md`](docs/HAND_TELEOP_SYSTEM.md) — full system reference
-  (every file, the RS485 protocol, design notes, troubleshooting).
 - [`docs/TELEOP_COMMANDS.md`](docs/TELEOP_COMMANDS.md) — command cheat-sheet.
 - `teleop_aliases.sh` — optional `teleop-*` shell shortcuts (`source` it).
 
