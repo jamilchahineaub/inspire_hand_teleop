@@ -28,6 +28,11 @@ Both consumers read the **same** `/hand_finger_angles`. Run sim, real, or both.
 source /opt/ros/humble/setup.bash
 source ~/Projects/Human_Humanoid_Interaction/g1_real_ws/install/setup.bash
 ros2 run zed_skeleton_pub zed_image_pub_node
+
+
+source /opt/ros/humble/setup.bash
+source ~/Projects/Human_Humanoid_Interaction/g1_real_ws/install/setup.bash
+ros2 run zed_skeleton_pub zed_image_pub_node
 '''
 ```bash
 # (ZED publisher already runs as zed_image_pub_node)
