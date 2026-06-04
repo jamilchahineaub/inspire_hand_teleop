@@ -1,0 +1,54 @@
+hand_landmark_node:
+  ros__parameters:
+    image_topic: /image/compressed
+    compressed_image: true
+    max_num_hands: 2
+    min_detection_confidence: 0.7
+    min_tracking_confidence: 0.5
+    publish_debug_image: true
+    # Flip Left↔Right labels from MediaPipe.
+    # Set true for non-mirrored cameras (ZED, RealSense, most robotics cameras).
+    # Set false only if using a mirrored selfie/webcam.
+    flip_handedness: true
+
+    # ── Finger bend angle calibration ──────────────────────────────────────────
+    # Each finger has a min (open hand) and max (closed fist) angle in degrees.
+    #
+    # How to calibrate:
+    #   1. Open hand flat toward camera, run:
+    #        ros2 topic echo /hand_finger_angles --once
+    #      Copy the *_angle_deg values → set as *_min_angle_deg below.
+    #
+    #   2. Close hand into a fist toward camera, run the same command.
+    #      Copy the *_angle_deg values → set as *_max_angle_deg below.
+    #
+    # Normalised value: x = clamp((angle - min) / (max - min), 0, 1)
+    # Inspire DFQ command: cmd = round(100 * x)   range [0, 100]
+    #
+    # Typical measured ranges (vary per person and camera distance):
+    #   open hand  → ~10°–30°
+    #   closed fist → ~70°–110°
+    #
+    # Angle definition: DFQ spec α = angle between wrist→MCP (metacarpal axis)
+    #                                  and MCP→PIP (proximal phalanx).
+    # DFQ hardware range: 19° (open) → 176.7° (robot physical limit).
+    # Human hand range:   ~15°–25° open,  ~90°–120° tight fist.
+    # Calibrate max by making the tightest fist you can and reading:
+    #   ros2 topic echo /hand_finger_angles --once | grep angle_deg
+    index_min_angle_deg:  19.0
+    index_max_angle_deg:  120.0
+    middle_min_angle_deg: 19.0
+    middle_max_angle_deg: 120.0
+    ring_min_angle_deg:   19.0
+    ring_max_angle_deg:   120.0
+    pinky_min_angle_deg:  19.0
+    pinky_max_angle_deg:  120.0
+    # Thumb BENDING (∠θ, curl): angle at the thumb MCP between CMC→MCP and MCP→TIP.
+    # Calibrate min with the thumb extended straight, max with it fully curled.
+    thumb_bend_min_angle_deg: 10.0
+    thumb_bend_max_angle_deg: 60.0
+    # Thumb ROTATION (∠β, opposition): thumb direction projected on the palm plane,
+    # measured against the index metacarpal. Calibrate min with the thumb tucked
+    # alongside the index, max with it fully opposed/abducted across the palm.
+    thumb_rot_min_angle_deg: 25.0
+    thumb_rot_max_angle_deg: 80.0

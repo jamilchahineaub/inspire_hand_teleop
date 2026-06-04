@@ -1,0 +1,23 @@
+services:
+  inspire_hand_teleop:
+    image: inspire_hand_teleop:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: inspire_hand_teleop
+    network_mode: host
+    # privileged already exposes all host /dev nodes, so the RS485-USB adapter
+    # (/dev/ttyUSB0 or /dev/ttyACM0) is reachable inside the container with no
+    # extra mapping. If you ever drop privileged, add instead:
+    #   devices:
+    #     - /dev/ttyUSB0:/dev/ttyUSB0
+    privileged: true
+    environment:
+      DISPLAY: ${DISPLAY}
+      ROS_DOMAIN_ID: 0
+      RMW_IMPLEMENTATION: rmw_cyclonedds_cpp
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ../src:/workspace/ros2_ws/src
+    stdin_open: true
+    tty: true

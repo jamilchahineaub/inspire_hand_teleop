@@ -1,0 +1,19 @@
+rs485_hand_node:
+  ros__parameters:
+    # Serial device for the RS485-USB adapter. Discover with:
+    #   ls /dev/ttyUSB* /dev/ttyACM*
+    #   python3 ~/Downloads/test.py --scan-ids
+    # If the node can't open it, it runs in command-publish-only mode and retries.
+    serial_port: /dev/ttyUSB0
+    baud_rate: 115200          # RH56 default (REDU_RATIO=0)
+    hand_id: 2                 # our physical hand ships as ID 2 (confirm with --scan-ids)
+    target_handedness: Right   # which human hand drives the robot (Left / Right)
+
+    # Thumb rotation (ANGLE_SET(5)) is not recoverable from a 2-D camera, so it is
+    # held at a fixed command. 0 = open(90°), 1000 = fully rotated(165°).
+    thumb_rotation_cmd: 500
+
+    publish_feedback: true      # read ANGLE_ACT → /hand_actual_angles (20 Hz)
+    publish_diagnostics: true   # read STATUS/ERROR → /hand_status, /hand_error (2 Hz)
+    clear_error_on_start: false # send CLEAR_ERROR=1 once when the port first opens
+    reconnect_period_s: 5.0     # retry opening the serial port this often

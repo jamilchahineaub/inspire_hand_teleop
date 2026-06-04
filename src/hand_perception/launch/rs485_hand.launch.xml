@@ -1,0 +1,13 @@
+<launch>
+  <!-- Send /hand_finger_angles to the real RH56 hand over RS485.
+       Override the serial port from the CLI:
+         ros2 launch hand_perception rs485_hand.launch.xml serial_port:=/dev/ttyACM0
+       Runs in command-publish-only mode if the port is unavailable (no hardware). -->
+  <arg name="serial_port" default="/dev/ttyUSB0"/>
+
+  <node pkg="hand_perception" exec="rs485_hand_node"
+        name="rs485_hand_node" output="screen">
+    <param from="$(find-pkg-share hand_perception)/config/rs485_params.yaml"/>
+    <param name="serial_port" value="$(var serial_port)"/>
+  </node>
+</launch>

@@ -1,0 +1,16 @@
+<launch>
+  <!-- Override image topic or debug flag from CLI:
+       ros2 launch hand_perception hand_perception.launch.xml image_topic:=/zed/rgb/image_rect_color
+       ros2 launch hand_perception hand_perception.launch.xml publish_debug_image:=false
+  -->
+  <arg name="image_topic" default="/image"/>
+  <arg name="publish_debug_image" default="true"/>
+
+  <node pkg="hand_perception" exec="hand_landmark_node"
+        name="hand_landmark_node" output="screen">
+    <!-- Load defaults from params.yaml, then apply launch-arg overrides -->
+    <param from="$(find-pkg-share hand_perception)/config/params.yaml"/>
+    <param name="image_topic" value="$(var image_topic)"/>
+    <param name="publish_debug_image" value="$(var publish_debug_image)"/>
+  </node>
+</launch>
