@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  CycloneDDS config so this container can reach the Unitree G1 Inspire DDS topics
+  (rt/inspire/cmd, rt/inspire/state) — used only by g1_inspire_hand_bridge.
+
+  Set <NetworkInterface name="..."> to the interface on THIS machine that faces
+  the robot's network. Find it with `ip addr` (the NIC that shares the robot's
+  subnet). Examples:
+    - real robot over Ethernet:  name="eth0" / "enp..." , multicast="true"
+    - everything local (loopback / on-robot): name="lo",  multicast="false"
+
+  Only ONE <NetworkInterface> should be active; the others are examples.
+-->
+<CycloneDDS>
+  <Domain>
+    <General>
+      <Interfaces>
+        <!-- Robot network NIC (Unitree G1 on 192.168.123.x, USB-Ethernet adapter). -->
+        <NetworkInterface name="enx98ded0145852" priority="default" multicast="true" />
+
+        <!-- Loopback fallback (local-only; will NOT see a remote robot): -->
+        <!-- <NetworkInterface name="lo" priority="default" multicast="false" /> -->
+      </Interfaces>
+    </General>
+    <Discovery>
+      <ParticipantIndex>auto</ParticipantIndex>
+      <MaxAutoParticipantIndex>120</MaxAutoParticipantIndex>
+    </Discovery>
+  </Domain>
+</CycloneDDS>

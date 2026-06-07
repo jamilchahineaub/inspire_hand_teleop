@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>g1_inspire_hand_bridge</name>
+  <version>0.1.0</version>
+  <description>
+    Bridge from the teleop hand command topic (/hand_finger_angles) to the
+    Unitree G1 Inspire hand DDS interface (rt/inspire/cmd), with optional
+    republishing of rt/inspire/state onto a ROS 2 topic.
+  </description>
+  <maintainer email="jamilchahine26@gmail.com">Jamil Chahine</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>unitree_go</depend>
+  <depend>hand_perception_msgs</depend>
+
+  <exec_depend>rosidl_default_runtime</exec_depend>
+  <member_of_group>rosidl_interface_packages</member_of_group>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

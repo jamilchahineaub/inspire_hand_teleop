@@ -16,8 +16,12 @@ services:
       DISPLAY: ${DISPLAY}
       ROS_DOMAIN_ID: 0
       RMW_IMPLEMENTATION: rmw_cyclonedds_cpp
+      # CycloneDDS config so g1_inspire_hand_bridge can reach the robot's Inspire
+      # DDS topics. Edit docker/cyclonedds.xml to set your network interface.
+      CYCLONEDDS_URI: file:///workspace/ros2_ws/cyclonedds.xml
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ../src:/workspace/ros2_ws/src
+      - ./cyclonedds.xml:/workspace/ros2_ws/cyclonedds.xml
     stdin_open: true
     tty: true
